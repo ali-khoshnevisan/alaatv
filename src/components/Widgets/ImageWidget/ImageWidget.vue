@@ -19,16 +19,18 @@
 
 <script>
 import { AEE } from 'src/assets/js/AEE/AnalyticsEnhancedEcommerce.js'
-import { mixinPrefetchServerData, mixinWidget } from 'src/mixin/Mixins.js'
+import { mixinPrefetchServerData, mixinWidget, mixinZebline } from 'src/mixin/Mixins.js'
 
 export default {
   name: 'ImageWidget',
-  mixins: [mixinPrefetchServerData, mixinWidget],
+  mixins: [mixinPrefetchServerData, mixinWidget, mixinZebline],
   data () {
     return {
       imageRef: 'img' + Date.now(),
       windowWidth: 0,
       defaultOptions: {
+        trackByZebline: false,
+        zeblineEvent: 'onClickBanner',
         responsiveShow: {
           xl: true,
           lg: true,
@@ -334,6 +336,11 @@ export default {
       return (url.indexOf('http://') > -1 || url.indexOf('https://') > -1)
     },
     takeAction (action) {
+      if (this.localOptions.trackByZebline) {
+        this.trackByZebline(this.localOptions.zeblineEvent, {
+          page: window.location.href
+        })
+      }
       if (!this.localOptions.hasAction) {
         return
       }

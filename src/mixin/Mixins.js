@@ -4,6 +4,7 @@ import mixinAuth from 'src/mixin/Auth.js'
 import mixinTicket from 'src/mixin/ticket.js'
 import mixinWidget from 'src/mixin/Widgets.js'
 import mixinAbrisham from 'src/mixin/Abrisham.js'
+import mixinZebline from 'src/mixin/Zebline'
 import mixinDateOptions from 'src/mixin/DateOptions.js'
 import mixinPageOptions from 'src/mixin/PageOptions.js'
 import mixinPageBuilder from 'src/mixin/PageBuilder.js'
@@ -22,6 +23,7 @@ export {
   mixinRubika,
   mixinWidget,
   mixinTicket,
+  mixinZebline,
   mixinAbrisham,
   mixinDateOptions,
   mixinPageOptions,

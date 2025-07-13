@@ -8,8 +8,8 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
-delete process.env['CommonProgramFiles(x86)'];
-delete process.env['ProgramFiles(x86)'];
+// delete process.env['CommonProgramFiles(x86)']
+// delete process.env['ProgramFiles(x86)']
 /* eslint-env node */
 // const ESLintPlugin = require('eslint-webpack-plugin')
 const { configure } = require('quasar/wrappers')

@@ -99,6 +99,24 @@
                 </div>
               </div>
             </q-expansion-item>
+            <q-expansion-item expand-separator
+                              icon="ph:ticket"
+                              label="Zebline">
+              <div class="row">
+                <div class="action col-md-12">
+                  <div class="cehckBox">
+                    <q-checkbox v-model="localOptions.trackByZebline"
+                                label="track By Zebline"
+                                right-label />
+                  </div>
+                  <div v-if="localOptions.trackByZebline"
+                       class="action-container q-mt-md">
+                    <q-input v-model="localOptions.zeblineEvent"
+                             label="zebline Event" />
+                  </div>
+                </div>
+              </div>
+            </q-expansion-item>
           </div>
         </div>
       </div>
@@ -131,6 +149,8 @@ export default defineComponent({
       toggleSize: 'all',
       dialog: false,
       defaultOptions: {
+        trackByZebline: false,
+        zeblineEvent: 'onClickBanner',
         imageSource: null,
         ratio: null,
         hasAction: false,

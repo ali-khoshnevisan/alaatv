@@ -79,14 +79,14 @@ const generateWidgetListJs = (jsonData, absolutePath) => {
   let widgetsComponentString = ''
   widgets.forEach((widget, index) => {
     const widgetName = widget.name
-    // const widgetPath = widget.path
-    const widgetPath = widget.path.replace(/^.*?\\src\\/, 'src/').replace(/\\/g, '/')
+    const widgetPath = widget.path
+    // const widgetPath = widget.path.replace(/^.*?\\src\\/, 'src/').replace(/\\/g, '/')
     // console.log('index', index)
     // console.log('widgets.length', widgets.length)
     const lastComponent = ((widgets.length - 1) === index)
     // console.log('lastComponent', lastComponent)
-    // widgetsComponentString += '  ' + widgetName + ': defineAsyncComponent(() => import(\'src/' + widgetPath + '/' + widgetName + '.vue\'))'
-    widgetsComponentString += '  ' + widgetName + ': defineAsyncComponent(() => import(\'' + widgetPath + '/' + widgetName + '.vue\'))'
+    widgetsComponentString += '  ' + widgetName + ': defineAsyncComponent(() => import(\'src/' + widgetPath + '/' + widgetName + '.vue\'))'
+    // widgetsComponentString += '  ' + widgetName + ': defineAsyncComponent(() => import(\'' + widgetPath + '/' + widgetName + '.vue\'))'
     if (!lastComponent) {
       widgetsComponentString += ',\n'
     } else {
@@ -99,15 +99,15 @@ const generateWidgetListJs = (jsonData, absolutePath) => {
   const widgetsOptionPanel = widgets.filter(widget => widget.optionPanel)
   widgetsOptionPanel.forEach((widget, index) => {
     const widgetName = widget.name
-    // const widgetPath = widget.path
-    const widgetPath = widget.path.replace(/^.*?\\src\\/, 'src/').replace(/\\/g, '/')
+    const widgetPath = widget.path
+    // const widgetPath = widget.path.replace(/^.*?\\src\\/, 'src/').replace(/\\/g, '/')
     const hasOptionPanel = !!widget.optionPanel
     if (hasOptionPanel) {
       const widgetOptionPanelName = widgetName + 'OptionPanel'
       const widgetOptionPanelPath = widgetPath + '/' + 'OptionPanel'
       const lastComponent = (widgetsOptionPanel.length - 1 === index)
-      // widgetsOptionPanelString += '  ' + widgetOptionPanelName + ': defineAsyncComponent(() => import(\'src/' + widgetOptionPanelPath + '.vue\'))'
-      widgetsOptionPanelString += '  ' + widgetOptionPanelName + ': defineAsyncComponent(() => import(\'' + widgetOptionPanelPath + '.vue\'))'
+      widgetsOptionPanelString += '  ' + widgetOptionPanelName + ': defineAsyncComponent(() => import(\'src/' + widgetOptionPanelPath + '.vue\'))'
+      // widgetsOptionPanelString += '  ' + widgetOptionPanelName + ': defineAsyncComponent(() => import(\'' + widgetOptionPanelPath + '.vue\'))'
       if (!lastComponent) {
         widgetsOptionPanelString += ',\n'
       } else {

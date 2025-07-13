@@ -6475,8 +6475,9 @@ joycon@^2.2.3:
   resolved "https://registry.yarnpkg.com/joycon/-/joycon-2.2.5.tgz#8d4cf4cbb2544d7b7583c216fcdfec19f6be1615"
   integrity sha512-YqvUxoOcVPnCp0VU1/56f+iKSdvIRJYPznH22BdXV3xMk75SFXhWeJkZ8C9XxUWt1b5x2X1SxuFygW1U0FmkEQ==
 
-"js-abstract-model@file:localPackages/js-model-dev":
+"js-abstract-model@git+https://gitlab+deploy-token-14:gldt-b2ywoXC6NhuY4uoHHt6y@git.alaatv.com/front-end/js-model#dev":
   version "0.1.35"
+  resolved "git+https://gitlab+deploy-token-14:gldt-b2ywoXC6NhuY4uoHHt6y@git.alaatv.com/front-end/js-model#406dc627e1fb4cc76788e5de1c90f2189439ce6e"
   dependencies:
     axios "^1.4.0"
     moment "^2.29.4"
@@ -8281,23 +8282,26 @@ qs@^6.7.0:
   dependencies:
     side-channel "^1.1.0"
 
-"quasar-app-extension-q-page-builder@file:localPackages/quasar-app-extension-q-page-builder-dev1":
+"quasar-app-extension-q-page-builder@git+https://gitlab+deploy-token-18:gldt-2sU3uP86WpTEWP4D6zMU@git.alaatv.com/front-end/quasar-app-extension-q-page-builder#dev1":
   version "1.0.2"
+  resolved "git+https://gitlab+deploy-token-18:gldt-2sU3uP86WpTEWP4D6zMU@git.alaatv.com/front-end/quasar-app-extension-q-page-builder#7866f174e67fd55a93f02a3a6bcdbd2a6684fc33"
   dependencies:
     quasar-ui-q-page-builder "^1.0.1"
 
-"quasar-crud@file:localPackages/quasar-crud-dev":
+"quasar-crud@git+https://gitlab+deploy-token-15:gldt-3hfBCxsozCsBjkAVsGHa@git.alaatv.com/front-end/quasar-crud#dev":
   version "2.0.0"
+  resolved "git+https://gitlab+deploy-token-15:gldt-3hfBCxsozCsBjkAVsGHa@git.alaatv.com/front-end/quasar-crud#9ed0fe712cc7e62508aa759495b2c5c879e45c7c"
   dependencies:
     "@quasar/extras" "^1.16.11"
     axios "^1.6.8"
     moment-jalaali "^0.10.0"
     quasar "^2.15.2"
-    quasar-form-builder "file:localPackages/quasar-form-builder-dev"
+    quasar-form-builder "git+https://gitlab+deploy-token-16:gldt-TDu-S7QbmTCSL28cyDac@git.alaatv.com/front-end/quasar-form-builder#dev"
     shvl "^3.0.0"
 
-"quasar-form-builder@file:localPackages/quasar-form-builder-dev":
+"quasar-form-builder@git+https://gitlab+deploy-token-16:gldt-TDu-S7QbmTCSL28cyDac@git.alaatv.com/front-end/quasar-form-builder#dev":
   version "2.0.0"
+  resolved "git+https://gitlab+deploy-token-16:gldt-TDu-S7QbmTCSL28cyDac@git.alaatv.com/front-end/quasar-form-builder#3216c545364b4a6871fe07e454a365400756a8e5"
   dependencies:
     "@quasar/extras" "^1.16.9"
     core-js "^3.34.0"
@@ -8306,8 +8310,9 @@ qs@^6.7.0:
     shvl "^3.0.0"
     vue "^3.4.21"
 
-"quasar-template-builder@file:localPackages/quasar-template-builder-dev":
+"quasar-template-builder@git+https://gitlab+deploy-token-17:gldt-b8HT8L8DVvEJyMyVKPx3@git.alaatv.com/front-end/quasar-template-builder#dev":
   version "1.2.0"
+  resolved "git+https://gitlab+deploy-token-17:gldt-b8HT8L8DVvEJyMyVKPx3@git.alaatv.com/front-end/quasar-template-builder#3018f46ae11639a7786a8e6a4f6818467bcfebe2"
   dependencies:
     "@quasar/extras" "^1.16.9"
     quasar "^2.14.2"
@@ -8324,8 +8329,9 @@ quasar-ui-q-page-builder@^1.0.1:
     shvl "^3.0.0"
     vue "^3.4.36"
 
-"quasar-ui-q-page-builder@file:localPackages/quasar-ui-q-page-builder-dev1":
+"quasar-ui-q-page-builder@git+https://gitlab+deploy-token-19:gldt-psEQySGZXUiFLrMaq6cz@git.alaatv.com/front-end/quasar-ui-q-page-builder#dev1":
   version "1.0.2"
+  resolved "git+https://gitlab+deploy-token-19:gldt-psEQySGZXUiFLrMaq6cz@git.alaatv.com/front-end/quasar-ui-q-page-builder#4aac36c628ab7d28c2883f24933e205a19134336"
   dependencies:
     "@quasar/extras" "^1.16.1"
     "@vue/compiler-sfc" "^3.2.47"
@@ -9309,7 +9315,7 @@ stop-iteration-iterator@^1.1.0:
     es-errors "^1.3.0"
     internal-slot "^1.1.0"
 
-"string-width-cjs@npm:string-width@^4.2.0":
+"string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -9325,15 +9331,6 @@ string-width@^2.0.0, string-width@^2.1.0, string-width@^2.1.1:
   dependencies:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^4.0.0"
-
-string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
-  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
-  dependencies:
-    emoji-regex "^8.0.0"
-    is-fullwidth-code-point "^3.0.0"
-    strip-ansi "^6.0.1"
 
 string-width@^5.0.1, string-width@^5.1.2:
   version "5.1.2"
@@ -9418,7 +9415,7 @@ stringify-object@^3.3.0:
     is-obj "^1.0.1"
     is-regexp "^1.0.0"
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -9438,13 +9435,6 @@ strip-ansi@^4.0.0:
   integrity sha512-4XaJ2zQdCzROZDivEVIDPkcQn8LMFSa8kj8Gxb/Lnwzv9A8VctNZ+lfivC/sV3ivW8ElJTERXZoPBRrZKkNKow==
   dependencies:
     ansi-regex "^3.0.0"
-
-strip-ansi@^6.0.0, strip-ansi@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
-  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
-  dependencies:
-    ansi-regex "^5.0.1"
 
 strip-ansi@^7.0.1:
   version "7.1.0"
@@ -10828,7 +10818,7 @@ workbox-window@7.3.0, workbox-window@^7.0.0:
     "@types/trusted-types" "^2.0.2"
     workbox-core "7.3.0"
 
-"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0":
+"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
@@ -10849,15 +10839,6 @@ wrap-ansi@^6.0.1:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-6.2.0.tgz#e9393ba07102e6c91a3b221478f0257cd2856e53"
   integrity sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==
-  dependencies:
-    ansi-styles "^4.0.0"
-    string-width "^4.1.0"
-    strip-ansi "^6.0.0"
-
-wrap-ansi@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
-  integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
   dependencies:
     ansi-styles "^4.0.0"
     string-width "^4.1.0"

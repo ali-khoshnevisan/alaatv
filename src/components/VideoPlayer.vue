@@ -28,11 +28,13 @@
       <div ref="VastTimerBtn"
            class="VastElement VastTimerBtn hide" />
       <div ref="VastSkipAdBtn"
-           class="VastElement VastSkipAdBtn hide">
+           class="VastElement VastSkipAdBtn hide"
+           @click="rejectVast">
         رد کردن
       </div>
       <div ref="VastLinkBtn"
-           class="VastElement VastLinkBtn hide">
+           class="VastElement VastLinkBtn show"
+           @click="moreInfo">
         اطلاعات بیشتر
       </div>
     </div>
@@ -85,19 +87,29 @@ import { APIGateway } from 'src/api/APIGateway.js'
 import { PlayerSourceList } from 'src/models/PlayerSource.js'
 import Fullscreen from 'src/assets/js/AndroidPluginRegister.js'
 import videoJsResolutionSwitcher from 'src/assets/js/videoJsResolutionSwitcher.js'
+import { mixinZebline } from 'src/mixin/Mixins.js'
 // https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8 (Live)
 // https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8
 
 export default {
   name: 'VideoPlayer',
+  mixins: [mixinZebline],
   props: {
     playButtonColor: {
       type: String,
       default: '#ffca28'
     },
+    contentId: {
+      type: Number,
+      default: 0
+    },
     subtitle: {
       type: String,
       default: null
+    },
+    contentTitle: {
+      type: String,
+      default: ''
     },
     playButtonBorder: {
       type: String,
@@ -309,6 +321,12 @@ export default {
     }
   },
   methods: {
+    moreInfo () {
+      this.trackByZebline('videoPlayerMoreInfo', { contentId: this.contentId, contentTitle: this.contentTitle })
+    },
+    rejectVast () {
+      this.trackByZebline('videoPlayerRejectVast', { contentId: this.contentId, contentTitle: this.contentTitle })
+    },
     getVast () {
       return APIGateway.vast.getXml(this.vast.url)
         .then((vastXml) => {

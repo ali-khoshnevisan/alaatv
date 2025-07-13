@@ -5,6 +5,8 @@
                   ref="videoPlayer"
                   :key="playerKey"
                   :source="content.getVideoSource()"
+                  :contentId="content.id"
+                  :contentTitle="content.title"
                   :poster="content.photo"
                   :over-player="hasTimepoint"
                   :over-player-width="'250px'"
