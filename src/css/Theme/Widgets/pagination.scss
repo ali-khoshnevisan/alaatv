@@ -1,0 +1,68 @@
+.q-pagination {
+  .q-btn--flat {
+    //background: #fff;
+    border-radius: 8px;
+
+    &:first-child {
+      box-shadow: none !important;
+      background: none;
+    }
+
+    &:last-child {
+      box-shadow: none !important;
+      background: none;
+    }
+  }
+
+  button {
+    &.q-btn--standard {
+      background: $primary !important;
+      color: #fff !important;
+      padding: 4px 8px;
+      box-shadow: none;
+      border-radius: 8px;
+    }
+
+    .q-btn--active::before {
+      box-shadow: none;
+    }
+
+    &:nth-child(2) {
+      //background: #fff;
+      border-radius: 12px;
+    }
+  }
+
+  .justify-center {
+    button {
+      //background: #fff !important;
+      border-radius: 12px;
+    }
+  }
+
+  /* new design */
+  .q-btn::before {
+    box-shadow: none;
+  }
+
+  .disabled {
+    background: #9690e4;
+    color: #fff !important;
+    box-shadow: none;
+    border-radius: 12px;
+
+    &:first-child {
+      box-shadow: none !important;
+      background: none;
+    }
+  }
+
+  .q-btn {
+    color: #6d708b !important;
+    width: 40px;
+    height: 40px;
+    padding: 0 !important;
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+}

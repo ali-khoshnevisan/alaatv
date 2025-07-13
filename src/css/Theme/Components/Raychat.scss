@@ -1,0 +1,14 @@
+@use "sass:map";
+
+iframe.raychat_frame {
+  z-index: 2000 !important;
+
+  $size-md: map.get($sizes, "md");
+
+  /* @media screen and ( width <= #{$size-md} ) { */
+  @media (max-width: #{$size-md}) {
+    & {
+      bottom: $space-13;
+    }
+  }
+}

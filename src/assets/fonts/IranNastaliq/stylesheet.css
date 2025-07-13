@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'IranNastaliq';
+    src: url('https://nodes.alaatv.com/upload/fonts/IranNastaliq/IranNastaliq.eot');
+    src: url('https://nodes.alaatv.com/upload/fonts/IranNastaliq/IranNastaliq.eot?#iefix') format('embedded-opentype'),
+        url('https://nodes.alaatv.com/upload/fonts/IranNastaliq/IranNastaliq.woff2') format('woff2'),
+        url('https://nodes.alaatv.com/upload/fonts/IranNastaliq/IranNastaliq.woff') format('woff'),
+        url('https://nodes.alaatv.com/upload/fonts/IranNastaliq/IranNastaliq.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+

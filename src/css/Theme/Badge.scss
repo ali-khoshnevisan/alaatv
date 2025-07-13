@@ -1,0 +1,39 @@
+.q-badge {
+  border-radius: $radius-3;
+  justify-content: center;
+  align-items: center;
+
+  &.badge-xs {
+    @include subtitle2;
+    padding: $spacing-base $space-2;
+  }
+
+  &.badge-sm {
+    @include subtitle1;
+    padding: $spacing-base $space-3;
+  }
+  &.badge-md {
+    @include caption1;
+    padding: $spacing-base $space-3;
+  }
+
+  &.q-badge--rounded {
+    padding: $spacing-none $spacing-base;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.badge-xs {
+      @include caption1;
+      $badge-xs-size: $space-5;
+      height: $badge-xs-size;
+      min-width: $badge-xs-size;
+      border-radius: $badge-xs-size;
+    }
+
+    &.badge-sm {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

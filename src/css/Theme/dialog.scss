@@ -1,0 +1,66 @@
+@mixin default-dialog {
+  background: $grey-1;
+  box-shadow: $shadow-8;
+  border-radius: $radius-4 !important;
+
+  .dialog-header {
+    align-items: center;
+    @include subtitle1;
+
+    .dialog-close-icon {
+      color: $grey-6;
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: $radius-3;
+    }
+  }
+
+  .dialog-body {
+    padding: $space-6;
+    @include body2;
+  }
+
+  .dialog-action {
+    padding: $space-4 $space-6;
+    display: grid;
+    grid-template-columns: 104px 1fr;
+
+    .dialog-action-btn-box {
+      justify-self: end;
+    }
+  }
+}
+
+.q-dialog {
+  & > .q-dialog__inner {
+    & > .q-card {
+      min-width: 544px;
+      border-radius: $radius-4 !important;
+
+      @include media-max-width('md') {
+        min-width: 320px;
+      }
+      .q-separator {
+        background: $grey-3;
+      }
+
+      .dialog-header-section {
+        padding: $space-4 $space-6 ;
+      }
+      .dialog-action-section {
+        padding: $spacing-none $space-6 $space-6;
+      }
+
+      .dialog-body-section {
+        padding: $space-6;
+      }
+
+
+      .bottom-sheet-action-section {
+        height: 146px;
+      }
+    }
+  }
+}
+

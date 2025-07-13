@@ -1,0 +1,213 @@
+@mixin body1 {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.48px;
+
+  @include media-max-width('md') {
+    font-size: 14px;
+    letter-spacing: -0.42px;
+  }
+}
+
+@mixin body2 {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.42px;
+
+  @include media-max-width('md') {
+    font-size: 12px;
+    letter-spacing: -0.36px;
+  }
+}
+
+@mixin caption1 {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.36px;
+
+  @include media-max-width('md') {
+    font-size: 12px;
+    letter-spacing: -0.3px;
+  }
+}
+
+@mixin caption2 {
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.3px;
+
+  @include media-max-width('md') {
+    font-size: 10px;
+    letter-spacing: -0.3px;
+  }
+}
+
+@mixin subtitle1 {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.48px;
+
+  @include media-max-width('md') {
+    font-size: 14px;
+    letter-spacing: -0.42px;
+  }
+}
+
+@mixin subtitle2 {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.42px;
+
+  @include media-max-width('md') {
+    font-size: 12px;
+  }
+}
+
+@mixin button1 {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.48px;
+}
+
+@mixin button2 {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.42px;
+}
+
+$katexFontSize: 1.2rem;
+$katexLineHeight: 4rem;
+
+a {
+  text-decoration: none;
+  color: #1d1d1d;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.text-h1,
+.text-h2,
+.text-h3,
+.text-h4,
+.text-h5,
+.text-h6 {
+  margin: 0;
+  font-style: normal;
+  line-height: normal;
+}
+
+h1, .text-h1 {
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -1.44px;
+
+  @include media-max-width('md') {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -1.2px;
+  }
+}
+
+h2, .text-h2 {
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -1.2px;
+
+  @include media-max-width('md') {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.96px;
+  }
+}
+
+h3, .text-h3 {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.96px;
+
+  @include media-max-width('md') {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.72px;
+  }
+}
+
+h4, .text-h4 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.72px;
+
+  @include media-max-width('md') {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+  }
+}
+
+h5, .text-h5 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.6px;
+
+  @include media-max-width('md') {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.54px;
+  }
+}
+
+h6, .text-h6 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.54px;
+
+  @include media-max-width('md') {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.48px;
+  }
+}
+
+.body1 {
+  @include body1;
+}
+
+.body2 {
+  @include body2;
+}
+
+.caption1 {
+  @include caption1;
+}
+
+.caption2 {
+  @include caption2;
+}
+
+.subtitle1 {
+  @include subtitle1;
+}
+
+.subtitle2 {
+  @include subtitle2;
+}

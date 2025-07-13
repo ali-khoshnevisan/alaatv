@@ -1,0 +1,325 @@
+<template>
+  <div class="product-page">
+    <div class="last-seen row">
+      <div class="icon">
+        <q-icon name="ph:play-circle"
+                :size="$q.screen.gt.sm ? '39px' : '26px'"
+                color="primary" />
+      </div>
+      <div>
+        <div class="text">
+          آخرین جلسه مشاهده شده
+        </div>
+        <div class="product-title">
+          {{selectedProduct.last_content_user_watched?.title }}
+        </div>
+      </div>
+      <div class="action">
+        <q-btn :label="$q.screen.gt.sm ? 'مشاهده جلسه' : ''"
+               flat
+               :icon="$q.screen.lt.sm ? 'ph:caret-left' : ''"
+               color="grey-9"
+               :square="$q.screen.lt.sm"
+               @click="gotoLastContent" />
+      </div>
+    </div>
+    <div class="set-info">
+      <div class="title">
+        {{selectedTopic}}
+      </div>
+    </div>
+    <q-list v-if="!setListLoading"
+            class="set-list-containet"
+            separator>
+      <expansion-item-component v-for="(set, index) in setList"
+                                :key="index"
+                                v-model:modelValue="set.expand"
+                                :switch-toggle-side="false"
+                                :hasAction="true"
+                                :separated="false"
+                                :label="expansionLabel(set)"
+                                :grey="false"
+                                @show="getSet(set.id)">
+        <template v-slot:action>
+          <span class="product-set-item-header">{{set.contents_count + ' گام '}}</span> <span>{{set.contents_duration === 0 || set.contents_duration === null ? ' ' : humanizeDuration(set.contents_duration) }}</span>
+        </template>
+        <q-card>
+          <q-card-section v-if="!setLoading || set.contents.list.length > 0"
+                          class="set-list-section">
+            <q-list class="set-list"
+                    separator>
+              <q-item v-for="(content, index) in set.contents.list"
+                      :key="index"
+                      :to="content.isPamphlet() ? '' : { name: 'UserPanel.Asset.TripleTitleSet.Content', params: {productId: this.$route.params.productId, setId: set.id, contentId: content.id} }"
+                      clickable
+                      @click="setSelectedData($event,content,set)">
+                <q-item-section avatar>
+                  <q-icon color="grey"
+                          :name="content.isPamphlet() ? 'description' : content.has_watch ? 'check_circle' : 'play_circle_outline'" />
+                </q-item-section>
+                <q-item-section class="content-title ellipsis-2-lines"
+                                @click="download(content)">
+                  {{ content.title }}
+                </q-item-section>
+                <q-item-section v-if="content.isPamphlet()"
+                                side>
+                  <q-btn color="primary"
+                         label="دانلود"
+                         @click="download(content)" />
+                </q-item-section>
+                <q-item-section v-else
+                                side>
+                  {{ content.duration === null || content.duration === 0 ? 'مدت ندارد' : humanizeDuration(content.duration) }}
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-card-section>
+          <q-card-section v-else>
+            <q-list>
+              <q-item v-for="item in 4"
+                      :key="item">
+                <q-skeleton width="100%"
+                            bordered />
+              </q-item>
+            </q-list>
+          </q-card-section>
+        </q-card>
+
+      </expansion-item-component>
+    </q-list>
+    <q-list v-else>
+      <q-item v-for="item in 10"
+              :key="item">
+        <q-skeleton width="100%"
+                    bordered />
+      </q-item>
+    </q-list>
+    <q-dialog v-model="productItemDialog">
+      <q-card class="custom-card">
+        <q-card-section class="flex justify-between items-center">
+          <div class="h1">
+            شما محصول را خریداری نکرده اید
+          </div>
+          <q-btn color="primary"
+                 icon="close"
+                 flat
+                 @click="toggleProductItemDialog" />
+        </q-card-section>
+        <q-card-section class="row items-center">
+          <product-item class="product-item"
+                        :options="{
+                          product: selectedProduct
+                        }" />
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+  </div>
+</template>
+
+<script>
+import { openURL } from 'quasar'
+import { mixinTripleTitleSet, mixinCapacitorDownloadFile } from 'src/mixin/Mixins.js'
+import ExpansionItemComponent from 'src/components/Utils/ExpansionItem.vue'
+import ProductItem from 'src/components/Widgets/Product/ProductItem/ProductItem.vue'
+
+export default {
+  name: 'TripleTitleSetProductPage',
+  components: {
+    ProductItem,
+    ExpansionItemComponent
+  },
+  mixins: [mixinTripleTitleSet, mixinCapacitorDownloadFile],
+  data () {
+    return {
+      productItemDialog: false
+    }
+  },
+  computed: {
+    selectedTopic () {
+      return this.$store.getters['TripleTitleSet/selectedTopic']
+    },
+    setList () {
+      return this.$store.getters['TripleTitleSet/setList']
+        .filter(set => (new RegExp('\\-\\s*' + this.selectedTopic + '\\s*\\-')).test(set.short_title))
+    },
+    setTopicList () {
+      return this.$store.getters['TripleTitleSet/setTopicList']
+    },
+    setLoading () {
+      return this.$store.getters['TripleTitleSet/setLoading']
+    },
+    setListLoading () {
+      return this.$store.getters['TripleTitleSet/setListLoading']
+    },
+    selectedProduct () {
+      return this.$store.getters['TripleTitleSet/selectedProduct']
+    }
+  },
+  watch: {
+    setTopicList () {
+      if (!this.selectedTopic) {
+        this.$store.commit('TripleTitleSet/updateSelectedTopic', this.setTopicList[0])
+      }
+    }
+  },
+  mounted () {
+    if (this.$q.screen.lt.md) {
+      this.$store.commit('AppLayout/updateLayoutLeftDrawerVisible', true)
+      this.$store.commit('AppLayout/updateLayoutLeftDrawerWidth', 250)
+    }
+  },
+  methods: {
+    gotoLastContent () {
+      this.$router.push({
+        name: 'UserPanel.Asset.TripleTitleSet.Content',
+        params: {
+          productId: this.selectedProduct.id,
+          setId: this.selectedProduct.last_content_user_watched?.set.id,
+          contentId: this.selectedProduct.last_content_user_watched?.id
+        }
+      })
+    },
+    expansionLabel (set) {
+      const splitted = set.short_title.split('-')
+      return splitted[splitted.length - 1]
+    },
+    afterSetEvent () {
+      this.getProduct()
+        .then(() => {
+          this.getProductSets(this.$route.params.productId)
+        })
+        .catch(() => {
+          this.getProductSets(this.$route.params.productId)
+        })
+    },
+    humanizeDuration (durationInSeconds) {
+      const durationInMinutes = Math.floor(durationInSeconds / 60)
+      const houres = Math.floor(durationInMinutes / 60)
+      const minutes = durationInMinutes % 60
+      if (houres > 0) {
+        return houres + ' ساعت و ' + minutes + ' دقیقه'
+      }
+
+      return minutes + ' دقیقه'
+    },
+    download (content) {
+      if (content.can_see === 0) {
+        this.toggleProductItemDialog()
+      } else if (content.isPamphlet() && content.file !== null && content.file.pamphlet.length > 0) {
+        if (this.isNative) {
+          this.downloadPdfWithAxios(content.file.pamphlet[0].link)
+        } else {
+          openURL(content.file.pamphlet[0].link)
+        }
+      }
+    },
+    toggleProductItemDialog () {
+      this.productItemDialog = !this.productItemDialog
+    },
+    setSelectedData (event, content, set) {
+      if (content.isPamphlet()) {
+        event.stopPropagation()
+      } else {
+        this.$store.commit('TripleTitleSet/setSelectedContent', content)
+        this.$store.commit('TripleTitleSet/setSelectedSet', set)
+      }
+    },
+    getProductSets (productId) {
+      this.$store.dispatch('TripleTitleSet/getSet', productId)
+    },
+    getSet (setId) {
+      this.$store.dispatch('TripleTitleSet/updateSet', setId)
+    },
+    getProduct () {
+      return this.$store.dispatch('TripleTitleSet/getSelectedProduct', { productId: this.$route.params.productId, eventId: this.event.id })
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.product-item {
+  width: 318px;
+  height: 510px;
+}
+
+.product-page {
+  max-width: 100%;
+  padding: 50px 170px 170px;
+  .last-seen {
+    font-family: IRANSansXFaNum;
+    padding: 24px;
+    background: rgba(255, 202, 40, 0.12);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    .icon {
+      padding: 4.5px;
+      margin-right: 12px;
+    }
+    .action {
+      margin-left: auto;
+    }
+    .text {
+      color: #616161;
+      font-size: 14px;
+      font-weight: 400;
+    }
+    .product-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    @include media-max-width('sm') {
+      padding: 16px;
+      .icon {
+        padding: 3px;
+        margin-right: 11px;
+      }
+      .text {
+        font-size: 12px;
+      }
+      .product-title {
+        font-size: 14px;
+      }
+    }
+  }
+  .set-info {
+    margin-bottom: 16px;
+    .title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+  .set-list-containet {
+    border: 1px solid rgba(203, 209, 217, 1);
+    border-radius: 12px;
+  }
+
+  @media only screen and (width <= 1450px) {
+    padding: 5px;
+  }
+
+  .product-set-item-header {
+    margin-right: $space-7;
+
+    @include media-max-width('md') {
+      margin-right: $space-3;
+    }
+  }
+
+  .set-list-section {
+    padding: $spacing-none;
+  }
+
+  .set-title {
+    max-width: 70%;
+
+    .set-title-text {
+      max-width: 100%;
+    }
+  }
+
+  .content-title {
+
+  }
+}
+</style>

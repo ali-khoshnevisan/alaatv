@@ -1,0 +1,8 @@
+{
+  "q-page-builder": {},
+  "@quasar/testing-unit-vitest": {
+    "options": [
+      "ui"
+    ]
+  }
+}

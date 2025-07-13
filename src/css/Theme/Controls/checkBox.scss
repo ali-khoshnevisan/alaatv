@@ -1,0 +1,40 @@
+.q-checkbox {
+  margin-right: $space-2;
+
+  &__inner {
+    margin-right: $space-1;
+    min-width: 24px;
+    width: 24px;
+    height: 24px;
+
+    &--falsy {
+      color: $grey-6 !important;
+    }
+
+    .q-checkbox__bg {
+      top: 17%;
+      left: 16%;
+      width: 16px;
+      height: 16px;
+      border: 1px solid currentColor;
+      border-radius: $radius-1;
+    }
+
+
+    &::before {
+      border-radius: $radius-1 !important;
+      background: currentColor;
+      opacity: 16%;
+    }
+  }
+
+  &.hovered {
+    .q-checkbox__inner {
+      border-radius: $radius-1 !important;
+    }
+  }
+
+  &.disabled {
+    opacity: 0.24 !important;
+  }
+}

@@ -1,0 +1,28 @@
+@import "src/css/Theme/Controls/input";
+@import "src/css/Theme/FormBuilder/card";
+@import "src/css/Theme/FormBuilder/input";
+@import "src/css/Theme/FormBuilder/editor";
+@import "src/css/Theme/FormBuilder/dateTime";
+@import "src/css/Theme/FormBuilder/separator";
+@import "src/css/Theme/FormBuilder/toggleButton";
+@import "src/css/Theme/FormBuilder/formBuilderCol";
+
+[class^="form-builder"] {
+  position: relative;
+
+  .outsideLabel {
+    color: $grey-9;
+
+    @include body2;
+
+    margin-bottom: $q-field__label_margin_bottom;
+  }
+
+  &:not(.form-builder-ToggleButton):not(.form-builder-link):not(.form-builder-optionGroup) {
+    .outsideLabel {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+}

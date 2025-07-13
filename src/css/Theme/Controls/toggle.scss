@@ -1,0 +1,120 @@
+/*
+.q-toggle {
+  &.toggle-sm {
+    .q-toggle__inner {
+      .q-toggle__track {
+        width: 32px;
+        height: 16px;
+        border-radius: 15px;
+      }
+
+      .q-toggle__thumb {
+        width: 12px;
+        height: 12px;
+        color: #fff;
+        top: 13px;
+
+        &::after {
+          box-shadow:
+            1px 2px 2px rgb(0 0 0 / 15%),
+            -1px -1px 5px rgb(255 255 255 / 20%);
+        }
+      }
+
+      &.q-toggle__inner--truthy {
+        .q-toggle__thumb {
+          left: 13px;
+        }
+      }
+
+      &.q-toggle__inner--falsy {
+        .q-toggle__track {
+          background-color: #c4c4c4;
+        }
+
+        .q-toggle__thumb {
+          left: 29px;
+        }
+      }
+    }
+  }
+
+  &.toggle-md {
+    .q-toggle__inner {
+      .q-toggle__track {
+        width: 44px;
+        height: 24px;
+        border-radius: 15px;
+      }
+
+      .q-toggle__thumb {
+        width: 16px;
+        height: 16px;
+        color: #fff;
+        top: 17px;
+
+        &::after {
+          box-shadow:
+            1px 2px 2px rgb(0 0 0 / 15%),
+            -1px -1px 5px rgb(255 255 255 / 20%);
+        }
+      }
+
+      &.q-toggle__inner--truthy {
+        .q-toggle__thumb {
+          left: 16px;
+        }
+      }
+
+      &.q-toggle__inner--falsy {
+        .q-toggle__track {
+          background-color: #c4c4c4;
+        }
+
+        .q-toggle__thumb {
+          left: 36px;
+        }
+      }
+    }
+  }
+
+  &.toggle-lg {
+    .q-toggle__inner {
+      .q-toggle__track {
+        width: 60px;
+        height: 32px;
+        border-radius: 15px;
+      }
+
+      .q-toggle__thumb {
+        color: #fff;
+        width: 24px;
+        height: 24px;
+        top: 20px;
+
+        &::after {
+          box-shadow:
+            1px 2px 2px rgb(0 0 0 / 15%),
+            -1px -1px 5px rgb(255 255 255 / 20%);
+        }
+      }
+
+      &.q-toggle__inner--truthy {
+        .q-toggle__thumb {
+          left: 19px;
+        }
+      }
+
+      &.q-toggle__inner--falsy {
+        .q-toggle__track {
+          background-color: #c4c4c4;
+        }
+
+        .q-toggle__thumb {
+          left: 47px;
+        }
+      }
+    }
+  }
+}
+*/

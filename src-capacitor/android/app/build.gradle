@@ -1,0 +1,114 @@
+import groovy.json.JsonSlurper
+
+// plugins {
+//   id "com.android.application"
+//   id "io.sentry.android.gradle" version "4.2.0"
+// }
+
+apply plugin: 'com.android.application'
+
+def versionCodeEnv = Integer.valueOf(System.getenv("ANDROID_VERSION_CODE"))
+def versionNameEnv = System.getenv("ANDROID_VERSION_NAME")
+
+// def getEnvProperties() {
+//     def envProperties = new Properties()
+//
+//     file("../../../.env").withInputStream {
+//         stream -> envProperties.load(stream)
+//     }
+//
+//     return envProperties
+// }
+//
+// def envVars = getEnvProperties()
+
+android {
+  namespace "ir.sanatisharif.android.konkur96"
+  compileSdk rootProject.ext.compileSdkVersion
+  defaultConfig {
+    applicationId "ir.sanatisharif.android.konkur96"
+    minSdkVersion rootProject.ext.minSdkVersion
+    targetSdkVersion rootProject.ext.targetSdkVersion
+
+    versionCode versionCodeEnv
+    versionName versionNameEnv
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    aaptOptions {
+      // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
+      // Default: https://android.googlesource.com/platform/frameworks/base/+/282e181b58cf72b6ca770dc7ca5f91f135444502/tools/aapt/AaptAssets.cpp#61
+      ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
+    }
+
+//     // Access the SENTRY_DSN environment variable you've defined in the .env file
+//     buildConfigField "String", "ANDROID_SENTRY_DSN", "\"${envVars['ANDROID_SENTRY_DSN'].toString()}\""
+  }
+
+  signingConfigs {
+        release {
+            storeFile file(System.getenv("ANDROID_KEYSTORE_PATH"))
+            storePassword System.getenv("ANDROID_STORE_PASS")
+            keyAlias System.getenv("ANDROID_ALIAS")
+            keyPassword System.getenv("ANDROID_KEY_PASS")
+        }
+    }
+
+  buildFeatures
+    {
+      dataBinding = true
+      buildConfig = true
+    }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      signingConfig signingConfigs.release
+    }
+  }
+
+
+//   // Define an ext property
+//   ext {
+//     envVariablesSentryDsn = envVars['ANDROID_SENTRY_DSN']
+//   }
+}
+
+repositories {
+  flatDir {
+    dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
+  }
+}
+
+dependencies {
+  // https://central.sonatype.com/artifact/io.sentry/sentry-android?smo=true
+  // https://docs.sentry.io/platforms/android/troubleshooting/#stackoverflowerror-during-sync-or-build
+//  implementation 'io.sentry:sentry-android:7.1.0' // or sentry-android-core if you don't use the ndk package
+
+  // https://mvnrepository.com/artifact/io.sentry/sentry-android
+//  runtimeOnly 'io.sentry:sentry-android:7.1.0'
+
+
+  implementation fileTree(include: ['*.jar'], dir: 'libs')
+  implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
+  implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
+  implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
+  implementation project(':capacitor-android')
+  testImplementation "junit:junit:$junitVersion"
+  androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
+  androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
+  implementation project(':capacitor-cordova-android-plugins')
+
+  implementation 'com.airbnb.android:lottie:3.6.1'
+}
+
+apply from: 'capacitor.build.gradle'
+
+try {
+  def servicesJSON = file('google-services.json')
+  if (servicesJSON.text) {
+    apply plugin: 'com.google.gms.google-services'
+  }
+} catch (Exception e) {
+  logger.info("google-services.json not found, google-services plugin not applied. Push Notifications won't work")
+}

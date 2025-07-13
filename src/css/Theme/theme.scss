@@ -1,0 +1,56 @@
+@import "src/css/fonts.scss";
+@import "src/css/Theme/Card.scss";
+@import "src/css/Theme/tabs.scss";
+@import "src/css/Theme/Badge.scss";
+@import "src/css/Theme/table.scss";
+@import "src/css/Theme/Banner.scss";
+@import "src/css/Theme/colors.scss";
+@import "src/css/Theme/dialog.scss";
+@import "src/css/Theme/tooltip.scss";
+@import "src/css/Theme/bottomSheet.scss";
+@import "src/css/Theme/Iconography.scss";
+@import "src/css/Theme/notification.scss";
+@import "src/css/Theme/Controls/Scroll.scss";
+@import "src/css/Theme/Widgets/widgets.scss";
+@import "src/css/Theme/Controls/controles.scss";
+@import "src/css/Theme/Components/Components.scss";
+@import "src/css/Theme/FormBuilder/formBuilder.scss";
+@import "src/css/Theme/quasar-crud/quasar-crud.scss";
+@import "src/css/Theme/PageBuilder/PageBuilder.scss";
+
+body {
+  font-family:
+    IRANSansXFaNum,
+    Arial,
+    -apple-system,
+    "Helvetica Neue",
+    Helvetica,
+    sans-serif;
+}
+.bg-overlay {
+  background-blend-mode: overlay;
+}
+
+.bg-triple-title-set-panel {
+  background: #fff;
+}
+
+body.body--light {
+  background: #f6f7fb;
+}
+
+.default-notify-class {
+  font-size: 18px;
+  text-align: center;
+  padding: 10px 16px;
+}
+
+@media screen and (width <= 600px) {
+  .main-layout {
+    &.hasFooter {
+      .q-page-container {
+        margin-bottom: $mobileFooterHeight;
+      }
+    }
+  }
+}

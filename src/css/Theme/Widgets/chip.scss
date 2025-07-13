@@ -1,0 +1,19 @@
+.q-chip {
+  background: #f4f5f6;
+  height: 22px;
+  font-weight: 500;
+  line-height: 21px;
+  color: #23263b;
+  font-size: 12px;
+  border-radius: 12px !important;
+  margin: 0;
+
+  .q-chip__content {
+    padding-right: 5px;
+  }
+
+  .q-icon {
+    font-size: 1.1em;
+    color: #23263b;
+  }
+}

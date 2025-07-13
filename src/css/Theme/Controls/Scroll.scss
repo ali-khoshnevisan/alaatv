@@ -1,0 +1,52 @@
+$scroll-width: 10px;
+$thumb-opacity: 0.6;
+$thumb-color: $primary;
+
+
+/* For Firefox */
+:root{
+  scrollbar-color: $thumb-color $grey-1 !important;
+  scrollbar-width: $scroll-width !important;
+}
+
+
+/* For Chrome */
+::-webkit-scrollbar {
+  width: $scroll-width;
+  height: $scroll-width;
+  border-radius: $radius-2;
+  background-color: $thumb-color;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: $radius-2;
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: $radius-2;
+  background-color: $thumb-color;
+}
+
+
+/* For Quasar scrollarea */
+.q-scrollarea {
+  .q-scrollarea__bar {
+    width: $scroll-width;
+    background: $grey-1;
+    //opacity: 1;
+  }
+  .q-scrollarea__thumb {
+    &.q-scrollarea__thumb--v {
+      width: $scroll-width;
+      background: $thumb-color;
+      opacity: $thumb-opacity;
+      left: unset !important;
+    }
+    &.q-scrollarea__thumb--h {
+      height: $scroll-width;
+      background: $thumb-color;
+      opacity: $thumb-opacity;
+    }
+  }
+}

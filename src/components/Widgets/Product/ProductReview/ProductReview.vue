@@ -1,0 +1,185 @@
+<template>
+  <div class="show-product-review"
+       :style="options.style"
+       :class="options.className">
+    <div class="product-description">
+      <div class="description-container">
+        <p class="title-style">
+          بررسی محصول
+        </p>
+        <q-skeleton v-if="product.loading"
+                    class="description-text custom-card"
+                    min-width="100%"
+                    type="rect" />
+
+        <q-card v-else-if="description"
+                class="description-text custom-card">
+          <span v-html="description" />
+        </q-card>
+        <q-card v-else
+                class="description-text custom-card">
+          <span>
+            توضیحی برای این محصول وجود ندارد
+          </span>
+        </q-card>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { Product } from 'src/models/Product.js'
+import { mixinWidget, mixinPrefetchServerData } from 'src/mixin/Mixins.js'
+import { APIGateway } from 'src/api/APIGateway.js'
+import { AEE } from 'assets/js/AEE/AnalyticsEnhancedEcommerce.js'
+
+export default {
+  name: 'ProductReview',
+  mixins: [mixinWidget, mixinPrefetchServerData],
+  props: {
+    options: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    }
+  },
+  data () {
+    return {
+      isFavored: false,
+      product: new Product()
+    }
+  },
+  computed: {
+    // product: {
+    //   get () {
+    //     return new Product(this.$store.getters['Widgets/data']('ProductReview'))
+    //   },
+    //   set (newData) {
+    //     this.$store.dispatch('Widgets/updateData', { name: 'ProductReview', data: newData })
+    //   }
+    // },
+    productId () {
+      if (typeof this.options.productId !== 'undefined' && this.options.productId !== null) {
+        return this.options.productId
+      }
+      if (this.options.urlParam && this.$route.params[this.options.urlParam]) {
+        return this.$route.params[this.options.urlParam]
+      }
+      if (this.$route.params.id) {
+        return this.$route.params.id
+      }
+      return this.product.id
+    },
+    description () {
+      if (this.product.description.long) {
+        return this.product.description.long
+      } else if (this.product.description.short) {
+        return this.product.description.short
+      } else if (this.product.description.slogan) {
+        return this.product.description.slogan
+      }
+      return null
+    }
+  },
+  methods: {
+    prefetchServerDataPromise () {
+      this.product.loading = true
+      return this.getProduct()
+    },
+    prefetchServerDataPromiseThen (data) {
+      this.product = new Product(data)
+      this.isFavored = data.is_favored_2
+      if (window) {
+        this.updateEECEventDetail()
+      }
+      this.product.loading = false
+    },
+    prefetchServerDataPromiseCatch () {
+      this.product.loading = false
+    },
+    updateEECEventDetail () {
+      AEE.productDetailViews('product.show', this.product.eec.getData(), {
+        TTl: 1000,
+        key: this.product.id
+      })
+    },
+    getProduct () {
+      this.product.loading = true
+      return APIGateway.product.show(this.productId)
+    }
+  }
+}
+</script>
+
+<style>
+h2 {
+  font-size: 28px;
+}
+</style>
+<style lang="scss" scoped>
+.show-product-review {
+  margin-bottom: 10px;
+
+}
+
+.title-style {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 28px;
+
+  &::before {
+    content: ".";
+    color: #BAD9FB;
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 10px;
+  }
+}
+
+.product-description {
+  margin-bottom: 80px;
+
+  .description-container {
+    //width: 1140px;
+
+    .description-text {
+      margin-top: 20px;
+      padding: 10px 20px;
+
+      &:deep(h2) {
+        font-size: 25px;
+      }
+    }
+  }
+}
+
+@media screen and (width <= 767px) {
+  .title-style {
+    width: 100%;
+  }
+
+  .product-description {
+    width: 100%;
+
+    .description-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
+
+@media screen and (width <= 575px) {
+  .product-description {
+    .description-container {
+      .description-text {
+        width: 100%;
+      }
+    }
+
+  }
+}
+</style>

@@ -1,0 +1,83 @@
+{
+  "name": "quasar-ui-q-page-builder",
+  "version": "1.0.2",
+  "author": "kerasus <aliesmaeeli20@gmail.com>",
+  "description": "QPageBuilder",
+  "license": "MIT",
+  "module": "dist/index.esm.js",
+  "main": "dist/index.common.js",
+  "scripts": {
+    "tt": "echo 'enter location' && read location && echo [$location]",
+    "lint": "eslint --fix --ext .js,.vue ./",
+    "dev": "cd dev && yarn dev && cd ..",
+    "dev:umd": "yarn build && node build/script.open-umd.js",
+    "dev:ssr": "cd dev && yarn 'dev:ssr' && cd ..",
+    "dev:ios": "cd dev && yarn 'dev:ios' && cd ..",
+    "dev:android": "cd dev && yarn 'dev:android' && cd ..",
+    "dev:electron": "cd dev && yarn 'dev:electron' && cd ..",
+    "build": "node build/index.js",
+    "build:js": "node build/script.javascript.js",
+    "build:css": "node build/script.css.js",
+    "pub": "npm version patch && yarn build && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "dependencies": {
+    "@quasar/extras": "^1.16.1",
+    "@vue/compiler-sfc": "^3.2.47",
+    "quasar": "^2.11.9",
+    "shvl": "^3.0.0",
+    "vue": "^3.2.47"
+  },
+  "bugs": "",
+  "homepage": "",
+  "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.18.9",
+    "@quasar/app-webpack": "^3.7.2",
+    "@rollup/plugin-buble": "^1.0.1",
+    "@rollup/plugin-commonjs": "^23.0.3",
+    "@rollup/plugin-json": "^5.0.2",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-replace": "^5.0.1",
+    "autoprefixer": "^10.4.16",
+    "chalk": "^4.1.0",
+    "core-js": "^3.34.0",
+    "cssnano": "^5.1.14",
+    "eslint": "8.22.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.6.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-vue": "^9.9.0",
+    "fs-extra": "^11.1.0",
+    "open": "^8.4.0",
+    "postcss": "^8.4.32",
+    "rimraf": "^3.0.2",
+    "rollup": "^3.29.4",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-scss": "^4.0.0",
+    "rollup-plugin-vue": "^6.0.0",
+    "rtlcss": "^4.1.1",
+    "sass": "^1.69.5",
+    "uglify-js": "^3.17.4",
+    "vue-router": "^4.1.6",
+    "zlib": "^1.0.5"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
+  },
+  "browserslist": [
+    "last 4 Chrome versions",
+    "last 4 Firefox versions",
+    "last 2 Edge versions",
+    "last 4 Safari versions",
+    "last 4 Android versions",
+    "last 4 ChromeAndroid versions",
+    "last 4 FirefoxAndroid versions",
+    "last 4 iOS versions"
+  ]
+}
