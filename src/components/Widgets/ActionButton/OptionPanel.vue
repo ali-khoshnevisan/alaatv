@@ -77,6 +77,20 @@
           </div>
           <div class="col-xs-12">
             <q-separator class="q-my-sm" />
+            <div class="row q-col-gutter-md">
+              <div class="col-md-3">
+                <q-checkbox v-model="localOptions.trackByZebline"
+                            label="track by zebline" />
+              </div>
+              <div v-if="localOptions.trackByZebline"
+                   class="col-md-9">
+                <q-input v-model="localOptions.zeblineEvent"
+                         label="zebline event" />
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12">
+            <q-separator class="q-my-sm" />
             <q-checkbox v-model="localOptions.showSeparator"
                         label="show separator" />
             <div v-if="localOptions.showSeparator">
@@ -474,6 +488,8 @@ export default defineComponent({
         }
       },
       defaultOptions: {
+        trackByZebline: false,
+        zeblineEvent: 'onClickButton',
         color: null,
         icon: null,
         rightIcon: false,

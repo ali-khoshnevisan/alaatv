@@ -85,7 +85,7 @@
 <script>
 import { defineAsyncComponent } from 'vue'
 import LazyImg from 'src/components/lazyImg.vue'
-import { mixinWidget, mixinAuth } from 'src/mixin/Mixins.js'
+import { mixinWidget, mixinAuth, mixinZebline } from 'src/mixin/Mixins.js'
 import TextWidget from 'src/components/Widgets/TextWidget/TextWidget.vue'
 import ImageWidget from 'src/components/Widgets/ImageWidget/ImageWidget.vue'
 import separatorWidget from 'src/components/Widgets/Separator/Separator.vue'
@@ -99,7 +99,7 @@ export default {
     separatorWidget,
     Timer: defineAsyncComponent(() => import('components/Widgets/Timer/Timer.vue'))
   },
-  mixins: [mixinWidget, mixinAuth],
+  mixins: [mixinWidget, mixinAuth, mixinZebline],
   props: {
     disable: {
       type: Boolean,
@@ -112,6 +112,8 @@ export default {
       drawer: false,
       mounted: false,
       defaultOptions: {
+        trackByZebline: false,
+        zeblineEvent: 'onClickButton',
         showSeparator: false,
         color: null,
         icon: null,
@@ -320,6 +322,9 @@ export default {
       }
     },
     takeAction () {
+      if (this.localOptions.trackByZebline) {
+        this.trackByZebline(this.localOptions.zeblineEvent, {})
+      }
       if (!this.localOptions.hasAction) {
         this.$emit('ActionButton', this.localOptions.scrollTo)
       } else if (this.callBack) {

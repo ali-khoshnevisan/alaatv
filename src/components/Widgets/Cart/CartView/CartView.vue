@@ -362,6 +362,7 @@ export default {
       this.changeDialogState(false)
       this.$store.dispatch('Cart/removeItemFromCart', { product: this.clickedOrderProductToRemove })
         .then(() => {
+          this.trackByZebline('remove_from_cart', this.clickedOrderProductToRemove)
           this.cartReview()
           this.$bus.emit('busEvent-refreshCart')
         })

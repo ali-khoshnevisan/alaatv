@@ -127,7 +127,7 @@ import { APIGateway } from 'src/api/APIGateway.js'
 import VideoPlayer from 'src/components/VideoPlayer.vue'
 import ShareNetwork from 'src/components/ShareNetwork.vue'
 import { PlayerSourceList } from 'src/models/PlayerSource.js'
-import { mixinWidget, mixinPrefetchServerData } from 'src/mixin/Mixins.js'
+import { mixinWidget, mixinPrefetchServerData, mixinZebline } from 'src/mixin/Mixins.js'
 import ProductInfoTab from 'src/components/Widgets/Product/ProductInfoTab/ProductInfoTab.vue'
 import ProductIntroBox from 'src/components/Widgets/Product/ProductIntroBox/ProductIntroBox.vue'
 import ProductAttributes from 'src/components/Widgets/Product/ProductIntroBox/ProductAttributes.vue'
@@ -151,7 +151,7 @@ export default defineComponent({
     ProductIntroBox,
     ProductAttributes
   },
-  mixins: [mixinWidget, mixinPrefetchServerData],
+  mixins: [mixinWidget, mixinPrefetchServerData, mixinZebline],
   data () {
     return {
       defaultOptions: {
@@ -240,6 +240,7 @@ export default defineComponent({
     },
     prefetchServerDataPromiseThen (product) {
       this.product = product
+      this.trackByZebline('product_view', this.product)
       this.loading = false
       this.loadProductAttributes()
       this.$nextTick(() => {

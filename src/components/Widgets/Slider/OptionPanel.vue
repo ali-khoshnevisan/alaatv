@@ -148,16 +148,28 @@
             <q-input v-model="selectedSlide.title"
                      label="title" />
           </div>
-          <div class="col-6">
+          <div class="col-4">
             <q-checkbox v-model="localOptions.list[selectedBannerIndex].hasAction"
                         label="has action" />
           </div>
-          <div class="col-6">
+          <div class="col-4">
             <div class="cehckBox">
               <q-checkbox v-model="localOptions.list[selectedBannerIndex].useAEEEvent"
                           label="استفاده از ایونت GTM"
                           right-label />
             </div>
+          </div>
+          <div class="col-4">
+            <div class="cehckBox">
+              <q-checkbox v-model="localOptions.trackByZebline"
+                          label="track By Zebline"
+                          right-label />
+            </div>
+          </div>
+          <div v-if="localOptions.trackByZebline"
+               class="col-md-12">
+            <q-input v-model="localOptions.zeblineEvent"
+                     label="zebline event" />
           </div>
           <div v-if="localOptions.list[selectedBannerIndex].hasAction"
                class="col-12 action-container">
@@ -424,6 +436,8 @@ export default defineComponent({
         'jump-down'
       ],
       defaultOptions: {
+        trackByZebline: false,
+        zeblineEvent: 'onClickSlide',
         transition: {
           animated: true,
           infinite: true,

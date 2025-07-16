@@ -240,7 +240,7 @@ import Ewano from 'src/assets/js/Ewano.js'
 import { Capacitor } from '@capacitor/core'
 import AuthLogin from 'src/components/Auth.vue'
 import LazyImg from 'src/components/lazyImg.vue'
-import { mixinWidget } from 'src/mixin/Mixins.js'
+import { mixinWidget, mixinZebline } from 'src/mixin/Mixins.js'
 import { APIGateway } from 'src/api/APIGateway.js'
 import { GatewayList } from 'src/models/Gateway.js'
 import Donate from 'src/components/Widgets/Cart/Donate/Donate.vue'
@@ -259,7 +259,7 @@ if (typeof window !== 'undefined') {
 export default {
   name: 'CartInvoice',
   components: { LazyImg, AuthLogin, Donate },
-  mixins: [mixinWidget, mixinRubika, mixinEwano],
+  mixins: [mixinWidget, mixinRubika, mixinEwano, mixinZebline],
   props: {
     options: {
       type: Object,
@@ -515,6 +515,7 @@ export default {
       this.referralCodeLoading = true
       APIGateway.referralCode.submitReferralCodeOnOrder({ data: { referral_code: this.giftCardValue } })
         .then(() => {
+          this.trackByZebline('submit_referral', { referral_code: this.giftCardValue })
           this.isReferralSet = true
           this.referralCodeLoading = false
           this.cartReview()
@@ -527,6 +528,7 @@ export default {
       this.couponLoading = true
       APIGateway.coupon.base({ code: this.couponValue })
         .then(() => {
+          this.trackByZebline('set_coupon', { coupon: this.couponValue })
           this.isCouponSet = true
           this.couponLoading = false
           this.cartReview()
@@ -544,6 +546,7 @@ export default {
       this.couponLoading = true
       APIGateway.coupon.deleteCoupon()
         .then(() => {
+          this.trackByZebline('cancel_coupon', { coupon: this.couponValue })
           this.isCouponSet = false
           this.couponValue = ''
           this.couponLoading = false
@@ -563,6 +566,7 @@ export default {
         order_id: this.cart.getOrderId()
       })
         .then(() => {
+          this.trackByZebline('cancel_referral', { referral_code: this.giftCardValue })
           this.isReferralSet = false
           this.giftCardValue = ''
           this.cartReview()
@@ -682,6 +686,7 @@ export default {
       this.$store.commit('loading/loading', true)
       this.$store.dispatch('Cart/paymentCheckout', { paymentMethod: this.selectedBank })
         .then((encryptedPaymentRedirectLink) => {
+          this.trackByZebline('payment', { cart: this.cart, gateway: this.this.gateways.list.find(gateway => gateway.name === this.selectedBank).displayName })
           if (Capacitor.isNativePlatform()) {
             this.openCapacitorSite(encryptedPaymentRedirectLink)
           } else {

@@ -55,6 +55,9 @@ export function addToCart (context, newProductData) {
     }
 
     setCartLoading(true)
+    if (typeof window !== 'undefined') {
+      window.zebline.event.track('addToCart', payload)
+    }
     if (isUserLogin) {
       APIGateway.cart.addToCart(payload)
         .then((response) => {

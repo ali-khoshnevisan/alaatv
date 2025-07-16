@@ -49,14 +49,14 @@
 
 <script>
 import { Capacitor } from '@capacitor/core'
-import { mixinAuth } from 'src/mixin/Mixins.js'
+import { mixinAuth, mixinZebline } from 'src/mixin/Mixins.js'
 import { APIGateway } from 'src/api/APIGateway.js'
 import mixinEwano from 'src/components/Widgets/Ewano/mixinEwano.js'
 import { AEE } from 'src/assets/js/AEE/AnalyticsEnhancedEcommerce.js'
 
 export default {
   name: 'ThankYouPage',
-  mixins: [mixinAuth, mixinEwano],
+  mixins: [mixinAuth, mixinEwano, mixinZebline],
   data () {
     return {
       loading: false,
@@ -117,6 +117,7 @@ export default {
           } else if (order.paymentstatus.id === 1) {
             this.hasPaid = false
           }
+          this.trackByZebline('payment_result', { result: this.hasPaid ? 'successful' : 'failed', order_id: this.orderId })
         })
         .catch(() => {
           this.loading = false

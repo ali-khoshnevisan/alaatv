@@ -83,7 +83,7 @@
 <script>
 import { ref } from 'vue'
 import { Banner, BannerList } from 'src/models/Banner.js'
-import { mixinWidget } from 'src/mixin/Mixins.js'
+import { mixinWidget, mixinZebline } from 'src/mixin/Mixins.js'
 import lazyImg from 'components/lazyImg.vue'
 import { AEE } from 'assets/js/AEE/AnalyticsEnhancedEcommerce'
 import { openURL } from 'quasar'
@@ -91,7 +91,7 @@ import { openURL } from 'quasar'
 export default {
   name: 'Slider',
   components: { lazyImg },
-  mixins: [mixinWidget],
+  mixins: [mixinWidget, mixinZebline],
   props: {
     options: {
       type: Object,
@@ -109,6 +109,8 @@ export default {
       windowWidth: 0,
       videoKey: Date.now(),
       defaultOptions: {
+        trackByZebline: false,
+        zeblineEvent: 'onClickSlide',
         list: [],
         control: {
           position: 'bottom',
@@ -288,6 +290,9 @@ export default {
       return getFeatureSizeOfGTSize(features, key, this.$q.screen.name)
     },
     takeAction (slide) {
+      if (this.localOptions.trackByZebline) {
+        this.trackByZebline(this.localOptions.zeblineEvent, {})
+      }
       if (slide.useAEEEvent) {
         this.pushClickedEvent(slide)
       }
